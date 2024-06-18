@@ -28,3 +28,15 @@ app.use(express.static("public"));
 
 // Middleware to parse cookies attached to the client request object
 app.use(cookieParser());
+
+
+//routes import
+
+import userRouter from "./routes/user.routes.js"
+
+//routes declaration
+
+app.use('/users',userRouter)
+//http://localhost:8000/api/v1/users/register
+//user ke baad jitte bhi method hai sab user.routes me likhe jayenge http://localhost:8000/api/v1/users ke baad sara access abb user.routes.js file me chala jayega jisse code saaf bhi rahega aue easily maintainable bhi
+export {app}
