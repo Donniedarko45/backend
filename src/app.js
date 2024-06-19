@@ -36,7 +36,7 @@ import userRouter from "./routes/user.routes.js"
 
 //routes declaration
 
-app.use('/users',userRouter)
+app.use('/api/v1/users',userRouter)
 //http://localhost:8000/api/v1/users/register
 //user ke baad jitte bhi method hai sab user.routes me likhe jayenge http://localhost:8000/api/v1/users ke baad sara access abb user.routes.js file me chala jayega jisse code saaf bhi rahega aue easily maintainable bhi
 export {app}
