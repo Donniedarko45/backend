@@ -338,19 +338,27 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
 
 const deleteAvatar = asyncHandler(async(req,res)=>{
         // *TODO :- delete old image - assignment...
-        const user = User.findOneAndUpdate(
-            req.user?._id,
-            {
-             $set:{
-                avatar: ""
-             }
-            },
-            {new : true}
-          ).select("-password")
-
-          return res
-        .status(200)
-        .json(new ApiResponse(200, user, "Avatar image deleted successfully"))
+        try {
+            const user = await User.findOneAndUpdate(
+                req.user?._id,
+                {
+                 $set:{
+                    avatar: ""
+                 }
+                },
+                {new : true}
+              ).select("-password")
+    
+              if(!user){
+                throw new ApiError(400, 'User not found')
+              }
+    
+              return res
+            .status(200)
+            .json(new ApiResponse(200, user, "Avatar image deleted successfully"))
+        } catch (error) {
+            throw new ApiError(401,error?.message||"Invalid User id")
+        }
 })
 
 
